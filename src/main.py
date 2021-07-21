@@ -16,6 +16,6 @@ def sha_256_encrypt(my_string):
     return safe_sha256
 
 
-string_sample = input("Input text string for SHA 256 encryption: ")
-sha_signature = sha_256_encrypt(string_sample)
-print("Encrypted output: " + sha_signature)
+string_sample = input("Input text for SHA 256 encryption: ")
+encrypted_input = sha_256_encrypt(string_sample)
+print("Encrypted input: " + encrypted_input)
