@@ -38,6 +38,7 @@ hashblock_current = ""
 transactions = ""
 
 
+# block producing function for building new hash from: 3 provided parameters and hostorical hash of previous block
 def produce_block(blockid, prev_hash, trx):
     global hashblock_previous
 
@@ -47,6 +48,7 @@ def produce_block(blockid, prev_hash, trx):
     block_table.add_row([blockid, cur_timestamp, current_hash, prev_hash, trx])
     print(block_table)
 
+    # store current hash for future use
     hashblock_previous = current_hash
 
 
@@ -101,7 +103,7 @@ print(colored("\nSuccess: Original and Check passwords are identical.\n", "green
 '''
 
 
-'''
+
 # 3. Simplified block-chain
 print("\nUse Case 3: Simplified blockchain")
 # Prerequisites:
@@ -111,7 +113,7 @@ print("\nUse Case 3: Simplified blockchain")
 
 # a] filter wrong values for desired blocks to be minted
 try:
-    desired_blocks = int(input("Enter desired amount of blocks to be mited (int): "))
+    desired_blocks = int(input("Enter desired amount of blocks to be minted (int): "))
     assert desired_blocks > 0
 
 except:
@@ -125,4 +127,3 @@ while block_id <= desired_blocks:
     # iterate block id & sleep
     block_id += 1
     time.sleep(1)
-'''
