@@ -102,8 +102,7 @@ time.sleep(1)
 print(colored("\nSuccess: Original and Check passwords are identical.\n", "green")) if encrypted_orig_pass == encrypted_check_pass else print(colored("\nFail: Original and Check passwords are different.\n", "red"))
 '''
 
-
-
+'''
 # 3. Simplified block-chain
 print("\nUse Case 3: Simplified blockchain")
 # Prerequisites:
@@ -127,3 +126,4 @@ while block_id <= desired_blocks:
     # iterate block id & sleep
     block_id += 1
     time.sleep(1)
+'''
