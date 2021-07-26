@@ -17,8 +17,8 @@ def clear():
         _ = system('clear')
 
 
-# sample encryption function showing condensed usage of SHA 256 encryption algorythm
-def sha_256_encrypt(my_string):
+# SHA 256 algorythm function
+def sha_256_hash(my_string):
     # encode() function used rather than update() function for lower-level string conversion to the byte-stream
     encoded_string = my_string.encode()
 
@@ -43,7 +43,7 @@ def produce_block(blockid, prev_hash, trx):
     global hashblock_previous
 
     cur_timestamp = int(time.time())
-    current_hash = sha_256_encrypt(repr(blockid) + repr(cur_timestamp) + prev_hash + trx)
+    current_hash = sha_256_hash(repr(blockid) + repr(cur_timestamp) + prev_hash + trx)
     block_table = PrettyTable(['Block ID', 'Timestamp', 'Current Hash', 'Previous Hash', 'Transactions'])
     block_table.add_row([blockid, cur_timestamp, current_hash, prev_hash, trx])
     print(block_table)
@@ -72,37 +72,36 @@ clear()
 
 
 '''
-# 1. String encoding
-print("\nUse Case 1: Input encryption")
-string_sample = input("Input text for SHA 256 encryption: ")
-encrypted_input = sha_256_encrypt(string_sample)
-print("Encrypted input: " + encrypted_input + "\n")
+# 1. String hashing
+print("\nUse Case 1: Input hashing")
+string_sample = input("Input text for SHA 256 hashing: ")
+encrypted_input = sha_256_hash(string_sample)
+print("Hashed input: " + encrypted_input + "\n")
 '''
-
 
 '''
 # 2. Password validation
 print("\nUse Case 2: Password validation")
 # a] Set original password and return digest from hash function
-original_password = getpass(prompt="\nInput original password: ", mask="*")
-encrypted_orig_pass = sha_256_encrypt(original_password)
+original_password = getpass(prompt="Input original password: ", mask="*")
+hashed_orig_pass = sha_256_hash(original_password)
 
 
 # b] Set check password and return digest from hash function
 check_password = getpass(prompt="Input check password: ", mask="*")
-encrypted_check_pass = sha_256_encrypt(check_password)
+hashed_check_pass = sha_256_hash(check_password)
 
 # c] Display hashes
 time.sleep(1)
-print("\nPassword 1 hash: " + encrypted_orig_pass)
-print("Password 2 hash: " + encrypted_check_pass)
+print("\nPassword 1 hash: " + hashed_orig_pass)
+print("Password 2 hash: " + hashed_check_pass)
 
 # d] Compare hashes and return success/fail
 time.sleep(1)
-print(colored("\nSuccess: Original and Check passwords are identical.\n", "green")) if encrypted_orig_pass == encrypted_check_pass else print(colored("\nFail: Original and Check passwords are different.\n", "red"))
+print(colored("\nSuccess: Original and Check passwords are identical.\n", "green")) if hashed_orig_pass == hashed_check_pass else print(colored("\nFailure: Original and Check passwords are different.\n", "red"))
 '''
 
-'''
+
 # 3. Simplified block-chain
 print("\nUse Case 3: Simplified blockchain")
 # Prerequisites:
@@ -126,4 +125,3 @@ while block_id <= desired_blocks:
     # iterate block id & sleep
     block_id += 1
     time.sleep(1)
-'''
